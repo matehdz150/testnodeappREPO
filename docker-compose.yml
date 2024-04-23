@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  node_app:
+    image: node:latest
+    volumes:
+      - ./app:/app
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    command: npm start
+    environment:
+      NODE_ENV: production
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
